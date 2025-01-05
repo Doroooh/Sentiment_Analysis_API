@@ -8,7 +8,7 @@ from keras_preprocessing.sequence import pad_sequences
 from keras.models import load_model
 
 def predict_class(input_text):
-    '''Function to predict sentiment class of the passed text'''
+    '''This function will predict the sentiment class of passed text'''
     
     text = []
     text.append(input_text)
@@ -16,15 +16,14 @@ def predict_class(input_text):
     sentiment_classes = ['Neutral', 'Negative', 'Positive']
     max_len=50
     
-    # Transform the text to a sequence of integers using a tokenizer object
+    # Transforming the text to a sequence of integers using a tokenizer object
     xt = tokenizer.texts_to_sequences(text)
-    # Pad sequences to the same length
+    # Padding sequences to the same length
     xt = pad_sequences(xt, padding='post', maxlen=max_len)
-    # Do the prediction using the loaded model
+    # Prediction using a loaded model
     yt = model.predict(xt).argmax(axis=1)
-    # Print the predicted sentiment
-    return ('The predicted sentiment is', sentiment_classes[yt[0]])
-
+    # Printing predicted sentiment
+    return ('The sentiment is', sentiment_classes[yt[0]])
 
 with open('tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
@@ -33,7 +32,6 @@ app = FastAPI(title="A sentiment analysis API",
     description="A sentiment analysis API to take in text from a client, respond if neutral, negative or positive.")
 
 model = load_model('model.h5')
-
 
 @app.get('/')
 def index():
