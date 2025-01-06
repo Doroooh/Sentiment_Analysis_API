@@ -1,9 +1,23 @@
-from flask import Flask, render_template, abort, request, jsonify 
-import nltk  
+from flask import Flask, render_template, abort, request, jsonify  
+from sklearn.feature_extraction.text import TfidVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer 
+import nltk 
+from string import punctuation
+import re
+from nltk.corpus import stopwords
+
+nltk.download('stopwords')
+
+set(stopwords.words('english'))
 
 # Initializing the app
 app = Flask(__name__)
+
+@app.route('/')
+def my_form():
+    retun render_template('form.html')
 
 # the dictionary to store output for the response
 output = {}
