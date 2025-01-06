@@ -1,52 +1,53 @@
-import uvicorn
-from fastapi import FastAPI
-from inputText import InputText
-import pickle
+from flask import Flask, render_template, abort, request, jsonify 
+import nltk  
+from nltk.sentiment.vader import SentimentIntensityAnalyzer 
 
-from keras.models import load_model
-from keras_preprocessing.sequence import pad_sequences
-from keras.models import load_model
+# Initializing the app
+app = Flask(__name__)
 
-def predict_class(input_text):
-    '''Function to predict sentiment class of the passed text'''
-    
-    text = []
-    text.append(input_text)
+# the dictionary to store output for the response
+output = {}
 
-    sentiment_classes = ['Neutral', 'Negative', 'Positive']
-    max_len=50
-    
-    # Transform the text to a sequence of integers using a tokenizer object
-    xt = tokenizer.texts_to_sequences(text)
-    # Pad sequences to the same length
-    xt = pad_sequences(xt, padding='post', maxlen=max_len)
-    # Do the prediction using the loaded model
-    yt = model.predict(xt).argmax(axis=1)
-    # Print the predicted sentiment
-    return ('The predicted sentiment is', sentiment_classes[yt[0]])
+# this function will determine the sentiment of a customer's comment
+def sentiment(customer_comment):
+    """
+    The function is using VADER sentiment analysis tool to analyze the polarity of a customer's comment on the bank's facebook posts.
+    The sentiments are either Positive, Neutral or Negative based the compound score.
+    """
+    nltk.download('vader_lexicon')  
+    sids = SentimentIntensityAnalyzer()  # Instantiating the sentiment analyzer
+    sent_score = sids.polarity_scores(customer_comment)['compound']  # the is the computation of the sentiment polarity score of a comment. 
+    # sentiment classification
+    if score > 0:
+        return "Positive"
+    elif score < 0:  
+        return "Negative"
+    else:
+        return "Neutral"
 
+@app.route("/", methods=["GET", "POST"])  # Allow the GET and POST methods for this route
+def sentimentRequest():
+    """
+    Handle the HTTP requests for sentiment analysis. 
+    - For POST requests, retrieve the input from data.
+    - For GET requests, retrieve input from query parameters.
+    Return a JSON response with sentiment classification.
+    """
+    if request.method == "POST":  # Checking if request is a POST
+        customer_comment = request.form['q']  
+        cust_sent = sentiment(customer_comment) 
+        output['sentiment'] = cust_sent   
+        return jsonify(output)  # Return the output as JSON
+    else:  # Handle GET requests
+        customer_comment = request.args.get('q')  
+        cust_sent = sentiment(customer_comment)  
+        print(customer_comment)  
+        output['sentiment'] = cust_sent  
+        return jsonify(output)  
 
-with open('tokenizer.pickle', 'rb') as handle:
-    tokenizer = pickle.load(handle)
-
-app = FastAPI(title="A sentiment analysis API",
-    description="A sentiment analysis API to take in text from a client, respond if neutral, negative or positive.")
-
-model = load_model('model.h5')
-
-
-@app.get('/')
-def index():
-    return {'message':'Consumer feedback!'}
-
-@app.post('/predict')
-def predict_sentiment(data:InputText):
-    data = data.dict()
-    text = data['text'] 
-    prediction = predict_class(text)
-    return prediction 
-
-if __name__ == '__main__':
-    uvicorn.run(app, host='127.0.0.1', port=8000)
-
-# python -m uvicorn app:app --reload
+if __name__ == "__main__":
+    """
+    Run the Flask application in debug mode for development.
+    The app listens for incoming connections on localhost:5000.
+    """
+    app.run(debug=True)
