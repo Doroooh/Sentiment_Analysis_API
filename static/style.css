@@ -1,32 +1,78 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Light background for a clean look */
     margin: 0;
     padding: 20px;
 }
 
 .container {
-    max-width: 600px;
+    max-width: 700px; /* Slightly wider for better content spacing */
     margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: white; /* White container background for contrast */
+    padding: 25px; /* Increased padding for a comfortable layout */
+    border-radius: 10px; /* Softer corners for a modern design */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15); /* Slightly enhanced shadow */
 }
 
 h1 {
+    font-size: 1.8rem; /* Larger font size for the title */
+    color: #343a40; /* Darker gray for text */
     margin-bottom: 20px;
+    text-align: center; /* Center-align the title for better emphasis */
 }
 
 form {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack form elements vertically */
+    gap: 15px; /* Add space between form elements */
+}
+
+.form-group label {
+    font-weight: bold; /* Make the label more prominent */
+    margin-bottom: 5px; /* Add spacing below the label */
+}
+
+input[type="file"] {
+    padding: 10px; /* Increased padding for better usability */
+}
+
+button[type="submit"] {
+    align-self: center; /* Center the button */
+    padding: 10px 20px; /* Increased padding for a better click target */
+    font-size: 1rem; /* Make the button text more readable */
+    border-radius: 5px; /* Rounded corners for the button */
 }
 
 #result {
-    margin-top: 20px;
+    margin-top: 25px; /* Space between the form and result section */
     white-space: pre-wrap;
-    background: #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
+    background: #f1f1f1; /* Light gray background for the results */
+    padding: 15px; /* Add padding for the results section */
+    border-radius: 8px; /* Rounded corners for the result box */
+    border: 1px solid #e0e0e0; /* Subtle border for distinction */
+}
+
+.list-group-item {
+    border: none; /* Remove borders for list items */
+    padding: 15px; /* Add spacing inside list items */
+    margin-bottom: 10px; /* Add spacing between items */
+    background: #f9f9f9; /* Light background for list items */
+    border-radius: 5px; /* Rounded corners for each item */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.alert {
+    font-size: 1rem; /* Ensure alert text is readable */
+}
+
+.alert-info {
+    background-color: #e9f7ff; /* Light blue for informational alerts */
+    color: #31708f; /* Darker blue for contrast */
+    border-color: #bce8f1; /* Matching border color */
+}
+
+.alert-danger {
+    background-color: #f8d7da; /* Light red for error alerts */
+    color: #721c24; /* Darker red for contrast */
+    border-color: #f5c6cb; /* Matching border color */
 }
