@@ -1,66 +1,56 @@
 html {
-    /* Set the overall background color for the page */
-    background: #00008B; 
+    background-color: #2E3A46;
 }
 
 body {
-    /* Define font and layout for the body content */
-   font: 100% "Open Sans", "Roboto", "Helvetica Neue", Arial, sans-serif;
-    line-height: 2.0; 
+    font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+    line-height: 1.6;
     position: relative;
-    background: #d3d3d3;
-    color: rgb(40, 40, 40);
-    font-weight: normal;
+    background-color: #F5F5F5;
+    color: #4C4341;
+    font-weight: 400;
     font-style: normal;
-    
-    width: 1280px; 
-margin: 20px auto; 
-padding: 20px; 
-
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 25px;
 }
 
 form, div {
-    /* Style forms and div containers */
-    border-bottom: 2px solid rgb(76, 67, 65); /* Subtle border for visual separation */
-    margin-bottom: 5em; /* Space below each element */
-    margin-left: auto; /* Center align */
-    margin-right: auto; /* Center align */
-    width: 50em; /* Set container width for consistent design */
+    border-bottom: 3px solid #4C4341;
+    margin-bottom: 3em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
 }
 
 h1 {
-    /* Header styles */
-    font-family: Georgia, Times, "Times New Roman", serif; /* Serif fonts for elegance */
-    font-size: 1.8em; /* Larger font size for prominence */
-    border-bottom: 2px solid rgb(76, 67, 65); /* Underline header for emphasis */
-    margin-bottom: 1.5em; /* Space below header */
-    background: url(../_images/icon_sprites_50.png) no-repeat; /* Decorative background image */
-    color: #000; /* Black font color for visibility */
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-size: 2em;
+    border-bottom: 3px solid #4C4341;
+    margin-bottom: 1em;
+    background-image: url('../assets/icons_sprites.png');
+    background-repeat: no-repeat;
 }
 
 .example_a {
-    /* Style for buttons or interactive elements */
-    border: none; /* Remove default border */
-    background: #404040; /* Dark gray background */
-    color: #ffffff !important; /* White text for contrast */
-    font-weight: 100; /* Light font weight for subtlety */
-    padding: 20px; /* Spacious padding for comfortable clicking */
-    text-transform: uppercase; /* Convert text to uppercase for emphasis */
-    border-radius: 6px; /* Smooth rounded corners */
-    display: inline-block; /* Inline display for alignment */
-    transition: all 0.3s ease 0s; /* Smooth transitions for hover effects */
-
-    float: right; /* Align button to the right */
-    margin-top: 2em; /* Space above the button */
+    border: none;
+    background-color: #333333;
+    color: #FFFFFF;
+    font-weight: 400;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    display: inline-block;
+    transition: all 0.4s ease;
+    float: right;
+    margin-top: 1.5em;
 }
 
 .example_a:hover {
-    /* Hover effect for interactive elements */
-    color: #404040 !important; /* Text color matches background */
-    font-weight: 700 !important; /* Bold font weight for emphasis */
-    letter-spacing: 3px; /* Increased spacing for standout effect */
-    background: none; /* Transparent background */
-    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57); /* Shadow effect for modern look */
-    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57); /* Shadow for Firefox */
-    transition: all 0.3s ease 0s; /* Smooth hover transition */
+    color: #333333;
+    font-weight: 600;
+    letter-spacing: 2px;
+    background-color: transparent;
+    box-shadow: 0px 6px 45px -12px rgba(0, 0, 0, 0.6);
+    transition: all 0.4s ease;
 }
