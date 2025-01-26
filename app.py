@@ -5,22 +5,22 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable Cross-Origin Resource Sharing
+CORS(app)  
 
-# Download the required NLTK resource once
+# Download required NLTK
 nltk.download('vader_lexicon')
 
 # Initialize Sentiment Analyzer
 analyzer = SentimentIntensityAnalyzer()
 
 def analyze_sentiment(text):
-    """Returns the sentiment of the given text as Positive, Negative, or Neutral."""
+    """Return sentiment of given text as Positive, Negative, or Neutral."""
     score = analyzer.polarity_scores(text)['compound']
     return "Positive" if score > 0 else "Negative" if score < 0 else "Neutral"
 
 @app.route("/", methods=["GET", "POST"])
 def sentiment_request():
-    """Handles sentiment analysis requests via GET and POST."""
+    """Handle sentiment analysis request via GET and POST."""
     text = request.form.get('q') if request.method == "POST" else request.args.get('q')
     
     if not text:
