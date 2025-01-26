@@ -4,22 +4,22 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 # Initialize Flask application
 app = Flask(__name__)
 
-# Dictionary to store results
+
 results_cache = {}
 
 def analyze_sentiment(text):
     """
-    Analyzes the sentiment of the given text using NLTK's VADER sentiment analyzer.
+    Analyze sentiment of given text using NLTK's VADER sentiment analyzer.
 
     Args:
         text (str): The input text to analyze.
 
     Returns:
-        str: 'Positive' or 'Negative' based on the sentiment score.
+        str: 'Positive' or 'Negative' or 'Neutral' based on the sentiment score.
     """
     analyzer = SentimentIntensityAnalyzer()
     sentiment_score = analyzer.polarity_scores(text).get('compound', 0)
-    return "Positive" if sentiment_score > 0 else "Negative"
+    return "Positive" if sentiment_score > 0 else "Negative" else "Neutral"
 
 @app.route("/", methods=["GET", "POST"])
 def handle_sentiment():
