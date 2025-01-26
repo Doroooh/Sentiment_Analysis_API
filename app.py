@@ -41,10 +41,10 @@ def analyze_sentiment():
         'form.html',
         final=compound_score,
         text1=cleaned_text,
-        text2=scores['pos'],
-        text3=scores['neu'],
+        text2=scores['positive'],
+        text3=scores['neutral'],
         text4=compound_score,
-        text5=scores['neg']
+        text5=scores['negative']
     )
 
 if __name__ == "__main__":
