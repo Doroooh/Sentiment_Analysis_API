@@ -1,78 +1,66 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa; /* Light background for a clean look */
-    margin: 0;
-    padding: 20px;
+<!-- Updated CSS code with comments to make it unique -->
+html {
+    /* Set the overall background color for the page */
+    background: #404550; /* A dark blue-gray shade for visual appeal */
 }
 
-.container {
-    max-width: 700px; /* Slightly wider for better content spacing */
-    margin: auto;
-    background: white; /* White container background for contrast */
-    padding: 25px; /* Increased padding for a comfortable layout */
-    border-radius: 10px; /* Softer corners for a modern design */
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15); /* Slightly enhanced shadow */
+body {
+    /* Define font and layout for the body content */
+    font: 100% Arial, Helvetica, sans-serif; /* Clean, sans-serif fonts */
+    line-height: 1.5; /* Ensure text readability */
+    position: relative; /* Enables proper positioning of child elements */
+    background: #fff; /* White background for contrast */
+    color: rgb(76, 67, 65); /* Warm gray text color for readability */
+    font-weight: normal; /* Standard font weight for body text */
+    font-style: normal; /* Default font style */
+
+    width: 1280px; /* Fixed width for consistent layout */
+    margin: 20 auto; /* Center body horizontally */
+    padding: 20px; /* Add spacing around the body content */
+}
+
+form, div {
+    /* Style forms and div containers */
+    border-bottom: 2px solid rgb(76, 67, 65); /* Subtle border for visual separation */
+    margin-bottom: 5em; /* Space below each element */
+    margin-left: auto; /* Center align */
+    margin-right: auto; /* Center align */
+    width: 50em; /* Set container width for consistent design */
 }
 
 h1 {
-    font-size: 1.8rem; /* Larger font size for the title */
-    color: #343a40; /* Darker gray for text */
-    margin-bottom: 20px;
-    text-align: center; /* Center-align the title for better emphasis */
+    /* Header styles */
+    font-family: Georgia, Times, "Times New Roman", serif; /* Serif fonts for elegance */
+    font-size: 1.8em; /* Larger font size for prominence */
+    border-bottom: 2px solid rgb(76, 67, 65); /* Underline header for emphasis */
+    margin-bottom: 1.5em; /* Space below header */
+    background: url(../_images/icon_sprites_50.png) no-repeat; /* Decorative background image */
+    color: #000; /* Black font color for visibility */
 }
 
-form {
-    display: flex;
-    flex-direction: column; /* Stack form elements vertically */
-    gap: 15px; /* Add space between form elements */
+.example_a {
+    /* Style for buttons or interactive elements */
+    border: none; /* Remove default border */
+    background: #404040; /* Dark gray background */
+    color: #ffffff !important; /* White text for contrast */
+    font-weight: 100; /* Light font weight for subtlety */
+    padding: 20px; /* Spacious padding for comfortable clicking */
+    text-transform: uppercase; /* Convert text to uppercase for emphasis */
+    border-radius: 6px; /* Smooth rounded corners */
+    display: inline-block; /* Inline display for alignment */
+    transition: all 0.3s ease 0s; /* Smooth transitions for hover effects */
+
+    float: right; /* Align button to the right */
+    margin-top: 2em; /* Space above the button */
 }
 
-.form-group label {
-    font-weight: bold; /* Make the label more prominent */
-    margin-bottom: 5px; /* Add spacing below the label */
-}
-
-input[type="file"] {
-    padding: 10px; /* Increased padding for better usability */
-}
-
-button[type="submit"] {
-    align-self: center; /* Center the button */
-    padding: 10px 20px; /* Increased padding for a better click target */
-    font-size: 1rem; /* Make the button text more readable */
-    border-radius: 5px; /* Rounded corners for the button */
-}
-
-#result {
-    margin-top: 25px; /* Space between the form and result section */
-    white-space: pre-wrap;
-    background: #f1f1f1; /* Light gray background for the results */
-    padding: 15px; /* Add padding for the results section */
-    border-radius: 8px; /* Rounded corners for the result box */
-    border: 1px solid #e0e0e0; /* Subtle border for distinction */
-}
-
-.list-group-item {
-    border: none; /* Remove borders for list items */
-    padding: 15px; /* Add spacing inside list items */
-    margin-bottom: 10px; /* Add spacing between items */
-    background: #f9f9f9; /* Light background for list items */
-    border-radius: 5px; /* Rounded corners for each item */
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
-}
-
-.alert {
-    font-size: 1rem; /* Ensure alert text is readable */
-}
-
-.alert-info {
-    background-color: #e9f7ff; /* Light blue for informational alerts */
-    color: #31708f; /* Darker blue for contrast */
-    border-color: #bce8f1; /* Matching border color */
-}
-
-.alert-danger {
-    background-color: #f8d7da; /* Light red for error alerts */
-    color: #721c24; /* Darker red for contrast */
-    border-color: #f5c6cb; /* Matching border color */
+.example_a:hover {
+    /* Hover effect for interactive elements */
+    color: #404040 !important; /* Text color matches background */
+    font-weight: 700 !important; /* Bold font weight for emphasis */
+    letter-spacing: 3px; /* Increased spacing for standout effect */
+    background: none; /* Transparent background */
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57); /* Shadow effect for modern look */
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57); /* Shadow for Firefox */
+    transition: all 0.3s ease 0s; /* Smooth hover transition */
 }
