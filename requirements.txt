@@ -1,6 +1,2 @@
-Flask
-PyMuPDF
-vaderSentiment
-matplotlib
-gunicorn
-werkzeug
+Flask==1.1.1
+nltk==3.4.5
