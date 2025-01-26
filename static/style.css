@@ -1,22 +1,22 @@
-<!-- Updated CSS code with comments to make it unique -->
 html {
     /* Set the overall background color for the page */
-    background: #404550; /* A dark blue-gray shade for visual appeal */
+    background: #00008B; 
 }
 
 body {
     /* Define font and layout for the body content */
-    font: 100% Arial, Helvetica, sans-serif; /* Clean, sans-serif fonts */
-    line-height: 1.5; /* Ensure text readability */
-    position: relative; /* Enables proper positioning of child elements */
-    background: #fff; /* White background for contrast */
-    color: rgb(76, 67, 65); /* Warm gray text color for readability */
-    font-weight: normal; /* Standard font weight for body text */
-    font-style: normal; /* Default font style */
+   font: 100% "Open Sans", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    line-height: 2.0; 
+    position: relative;
+    background: #d3d3d3;
+    color: rgb(40, 40, 40);
+    font-weight: normal;
+    font-style: normal;
+    
+    width: 1280px; 
+margin: 20px auto; 
+padding: 20px; 
 
-    width: 1280px; /* Fixed width for consistent layout */
-    margin: 20 auto; /* Center body horizontally */
-    padding: 20px; /* Add spacing around the body content */
 }
 
 form, div {
