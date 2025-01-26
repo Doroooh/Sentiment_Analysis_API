@@ -1,51 +1,32 @@
-from flask import Flask, request, render_template
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import nltk
-import re
-from string import punctuation
-from nltk.corpus import stopwords
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-# Ensure NLTK stopwords are downloaded
-nltk.download('stopwords')
-
-# Flask app initialization
+# Initialize Flask app
 app = Flask(__name__)
+CORS(app)  # Enable Cross-Origin Resource Sharing
 
-@app.route('/')
-def index():
-    # Render the HTML form
-    return render_template('form.html')
+# Download the required NLTK resource once
+nltk.download('vader_lexicon')
 
-@app.route('/', methods=['POST'])
-def analyze_sentiment():
-    stop_words = set(stopwords.words('english'))
-    
-    # Get input text from the form
-    user_input = request.form['text1'].lower()
-    
-    # Remove digits and punctuations
-    cleaned_text = ''.join([char for char in user_input if char not in punctuation and not char.isdigit()])
-    
-    # Remove stopwords
-    processed_text = ' '.join([word for word in cleaned_text.split() if word not in stop_words])
-    
-    # Sentiment analysis
-    sentiment_analyzer = SentimentIntensityAnalyzer()
-    scores = sentiment_analyzer.polarity_scores(processed_text)
-    compound_score = round((1 + scores['compound']) / 2, 2)  # Normalize compound score to 0-1 scale
+# Initialize Sentiment Analyzer
+analyzer = SentimentIntensityAnalyzer()
 
-    # Render results with updated template
-    return render_template(
-        'form.html',
-        final=compound_score,
-        text1=cleaned_text,
-        text2=scores['positive'],
-        text3=scores['neutral'],
-        text4=compound_score,
-        text5=scores['negative']
-    )
+def analyze_sentiment(text):
+    """Returns the sentiment of the given text as Positive, Negative, or Neutral."""
+    score = analyzer.polarity_scores(text)['compound']
+    return "Positive" if score > 0 else "Negative" if score < 0 else "Neutral"
+
+@app.route("/", methods=["GET", "POST"])
+def sentiment_request():
+    """Handles sentiment analysis requests via GET and POST."""
+    text = request.form.get('q') if request.method == "POST" else request.args.get('q')
+    
+    if not text:
+        return jsonify({"error": "No text provided"}), 400
+
+    return jsonify({"sentiment": analyze_sentiment(text)})
 
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5002, threaded=True)
+    app.run(debug=True)
