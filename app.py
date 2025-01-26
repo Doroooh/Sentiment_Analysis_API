@@ -1,76 +1,53 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
-from werkzeug.utils import secure_filename
+from flask import Flask, request, render_template
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-import os
-import fitz  # PyMuPDF for PDF text extraction
+import nltk
+from string import punctuation
+import re
+from nltk.corpus import stopwords
 
-# Create a Flask application instance
+# Download NLTK stopwords package if not already present
+nltk.download('stopwords')
+
+# Initialize the stopwords set to avoid redundancy during function calls
+set(stopwords.words('english'))
+
+# Create an instance of the Flask application
 app = Flask(__name__)
 
-# Define the folder to store uploaded files
-UPLOAD_FOLDER = 'uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-# Ensure the upload folder exists
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)  # Create the folder if it does not exist
-
-# Define the root route that serves the homepage
+# Define the root route to display the form page
 @app.route('/')
-def index():
-    return render_template('index.html')  # Render the homepage template
+def my_form():
+    return render_template('form.html')
 
-# Define the route for uploading and processing PDF files
-@app.route('/upload', methods=['POST'])
-def upload_pdf():
-    # Check if a file is included in the request
-    if 'file' not in request.files:
-        return "No file part", 400  # Return an error if no file is found
+# Define the route for processing the form data upon submission
+@app.route('/', methods=['POST'])
+def my_form_post():
+    # Load the list of English stopwords
+    stop_words = stopwords.words('english')
+
+    # Retrieve and process the text input from the form
+    text1 = request.form['text1'].lower()  # Convert text to lowercase for uniformity
     
-    file = request.files['file']  # Get the uploaded file
-    
-    # Check if the filename is empty
-    if file.filename == '':
-        return "No selected file", 400  # Return an error if no file is selected
-    
-    filename = secure_filename(file.filename)  # Secure the filename to avoid security issues
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)  # Construct the file path
-    file.save(file_path)  # Save the uploaded file to the designated folder
+    # Remove numeric characters from the input text
+    text_final = ''.join(c for c in text1 if not c.isdigit())
 
-    # Process the file if it is a PDF
-    if filename.endswith('.pdf'):
-        pdf_text = extract_text_from_pdf(file_path)  # Extract text from the PDF
-        sentiment_scores = analyze_sentiment(pdf_text)  # Perform sentiment analysis
-        return jsonify({
-            'sentiment': sentiment_scores  # Return the sentiment scores
-        })
+    # Remove stopwords from the processed text
+    processed_doc1 = ' '.join([word for word in text_final.split() if word not in stop_words])
 
-    else:
-        return "Unsupported file type", 400  # Return an error for unsupported file types
+    # Initialize the VADER SentimentIntensityAnalyzer
+    sa = SentimentIntensityAnalyzer()
 
-# Analyze the sentiment of a given text using VADER
-def analyze_sentiment(text):
-    analyzer = SentimentIntensityAnalyzer()  # Create an instance of the sentiment analyzer
-    sentiment_scores = analyzer.polarity_scores(text)  # Get sentiment scores for the text
-    return sentiment_scores  # Return the sentiment scores
+    # Perform sentiment analysis on the cleaned text
+    dd = sa.polarity_scores(text=processed_doc1)
 
-# Extract text from a PDF file
-def extract_text_from_pdf(pdf_path):
-    document = fitz.open(pdf_path)  # Open the PDF document
-    text = ""  # Initialize an empty string to hold the extracted text
-    
-    # Iterate over each page in the PDF
-    for page_num in range(document.page_count):
-        page = document.load_page(page_num)  # Load the page
-        text += page.get_text()  # Extract text from the page
-    
-    return text  # Return the concatenated text
+    # Calculate a normalized compound score (scale: 0 to 1)
+    compound = round((1 + dd['compound'])/2, 2)
 
-# Define the route to serve uploaded files
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)  # Send the requested file
+    # Render the form page with sentiment analysis results
+    return render_template('form.html', final=compound, text1=text_final, text2=dd['pos'], text5=dd['neg'], text4=compound, text3=dd['neu'])
 
-# Run the Flask application in debug mode if executed directly
-if __name__ == '__main__':
-    app.run(debug=True)
+# Run the Flask application with specified host and port settings
+if __name__ == "__main__":
+    app.run(debug=True, host="127.0.0.1", port=5002, threaded=True)
