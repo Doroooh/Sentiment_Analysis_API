@@ -11,12 +11,10 @@ Visualizes trends over time, supports filtering by sentiments, and offers action
 
 # Technologies
 Backend: Flask 
-Database: MongoDB to manage the data. 
-NLP Tools: TextBlob to process text and sentiment analysis.
-Visualization: Flask-Admin to create the dashboard.
-Deployment: Docker for containerization and AWS for hosting.
+NLTK
 
 # Challenges
 Collecting reliable sample data from X was challenging, most data was obtained from Facebook.
+Also experienced challenges successfully deploying the API
 
  Waithira Kamau
