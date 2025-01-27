@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, abort
+import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 # Initialize Flask application
@@ -19,12 +20,12 @@ def analyze_sentiment(text):
     """
     analyzer = SentimentIntensityAnalyzer()
     sentiment_score = analyzer.polarity_scores(text).get('compound', 0)
-    return "Positive" if sentiment_score > 0 else "Negative" else "Neutral"
+    return "Positive" if sentiment_score > 0 else "Negative" if sentiment_score < 0 else "Neutral"
 
 @app.route("/", methods=["GET", "POST"])
 def handle_sentiment():
     """
-    Handles sentiment analysis requests via GET and POST methods.
+    Handle sentiment analysis requests via GET and POST methods.
 
     For POST requests:
         Expects 'sentiment_input' in form data and returns JSON response.
