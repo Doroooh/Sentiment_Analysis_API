@@ -26,7 +26,7 @@ def sentiment_request():
     if not text:
         return jsonify({"error": "No text provided"}), 400
 
-    return jsonify({"sentence": analyze_sentiment(text)})
+    return jsonify({"sentiment": analyze_sentiment(text)})
 
 if __name__ == "__main__":
     app.run(debug=True)
