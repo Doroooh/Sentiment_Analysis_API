@@ -1,20 +1,22 @@
 # Sentiment_Analysis_API
-This project will leverage NLP to enhance customer experience to analyze and categorize consumer feedback. It collects feedback through an API, analyzes the sentiments and organizes them into categories presenting the data in an interactive dashboard. It will help to better understand opinions to shape business decisions.
+This project will leverage NLP to enhance customer experience to analyze and categorize consumer feedback. It collects feedback through an API, analyzes the sentiments and organizes them into categories. 
 
 # Features
 Feedback API: 
-This is a RESTful API endpoints for the submission of consumer feedback.
+This is a REST API endpoints for the submission of consumer feedback.
 Sentiment Analysis: 
-Automated classification of feedback into positive, neutral, or negative categories using TextBlob and preprocessing techniques to clean data.
-Dashboard:
-Visualizes trends over time, supports filtering by sentiments, and offers actionable insights through graphs and charts.
+Automated classification of feedback into positive, neutral, or negative categories using NLTK and preprocessing techniques to clean data.
+
 
 # Technologies
-Backend: Flask 
+Backend: 
+Flask 
 NLTK
+Rest API
 
 # Challenges
-Collecting reliable sample data from X was challenging, most data was obtained from Facebook.
+Collecting reliable sample data from X was challenging, most data was obtained from Facebook. Collated in the csv file for testing. 
+
 Also experienced challenges successfully deploying the API
 
  Waithira Kamau
