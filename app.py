@@ -20,13 +20,13 @@ def analyze_sentiment(text):
 
 @app.route("/", methods=["GET", "POST"])
 def sentiment_request():
-    """Handle sentiment analysis request via GET and POST."""
+    """Handling the sentiment analysis request via GET and POST."""
     text = request.form.get('q') if request.method == "POST" else request.args.get('q')
     
     if not text:
         return jsonify({"error": "No text provided"}), 400
 
-    return jsonify({"sentiment": analyze_sentiment(text)})
+    return jsonify({"sentence": analyze_sentiment(text)})
 
 if __name__ == "__main__":
     app.run(debug=True)
