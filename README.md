@@ -17,6 +17,6 @@ Rest API
 # Challenges
 Collecting reliable sample data from X was challenging, most data was obtained from Facebook. Collated in the csv file for testing. 
 
-Also experienced challenges successfully deploying the API
+
 
  Waithira Kamau
